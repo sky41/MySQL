@@ -7,15 +7,15 @@ import java.util.List;
 public interface UserService {
 
     List<User> queryUserList();
-
     User queryUserById(int id);
-
     String addUser(User user);
-
     String deleteUserById(int id);
-
     String updateUser(User user);
+
 }
+//    User login(String name, String passwd);
+//
+//    String register(User newUser);
 //修改1.0.0备份
 //package com.my.mysql.service;
 //
@@ -31,7 +31,7 @@ public interface UserService {
 //@Service
 //public class UserService {
 //    @Autowired
-//    UserMapper userMapper;
+//
 //    public List<User> queryUserList(){
 //        return userMapper.queryUserList();
 //

@@ -14,6 +14,9 @@ public interface UserMapper {
     void addUser(User user);
     void deleteUserById(int id);
     void updateUser(User user);
+//    void login(User user);
+//    void register(User user);
+
 
 }
 

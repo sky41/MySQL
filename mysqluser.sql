@@ -14,6 +14,7 @@ VALUES
     ('2','root','123456'),
     ('3','rs','root');
 select * from user;
+
 select * from mysqluser.user;
 select * from mysqluser.user where id = 1;
 insert into user(id, name, passwd)
