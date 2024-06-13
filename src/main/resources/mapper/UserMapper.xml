@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.my.mysql.mapper.UserMapper">
+    <select id="queryUserList" resultType="User">
+        select * from mysqluser.user
+    </select>
+
+    <select id="queryUserById" resultType="User" parameterType="int">
+        select * from mysqluser.user where id = #{id};
+    </select>
+
+    <insert id="addUser">
+        insert into mysqluser.user (id, name,passwd) VALUES (#{id},#{name},#{passwd})
+    </insert>
+
+    <delete id="deleteUserById">
+        delete from mysqluser.user where id=#{id}
+    </delete>
+    <update id="updateUser" parameterType="User">
+        UPDATE mysqluser.user
+#         UPDATE mysqluser.user user是使用的数据库里面数据表
+        SET
+        id = #{id},
+        name = #{name},
+        passwd = #{passwd}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
