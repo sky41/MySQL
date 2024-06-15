@@ -1,10 +1,8 @@
 package com.my.mysql.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+@Setter
 @Getter
 @Data
 @NoArgsConstructor
@@ -27,18 +25,6 @@ public class User {
         if (passwd != null) {
             this.passwd = passwd;
         }
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
     }
 
     public static void main(String[] args) {
