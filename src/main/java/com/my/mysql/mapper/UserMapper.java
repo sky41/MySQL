@@ -14,10 +14,7 @@ public interface UserMapper {
     void addUser(User user);
     void deleteUserById(int id);
     void updateUser(User user);
-//    void login(User user);
-//    void register(User user);
-
-
+    User login(String name, String passwd);
+    int checkUserExists(String name);
+    void insertUser(User user);
 }
-
-
