@@ -1,5 +1,5 @@
 show databases ;
-create database mysqluser;
+# create database mysqluser;
 use mysqluser;
 create table user(
                      id int(20) not null primary key ,

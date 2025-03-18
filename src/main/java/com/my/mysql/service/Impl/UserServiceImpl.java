@@ -1,10 +1,9 @@
 package com.my.mysql.service.Impl;
 
+import com.my.mysql.controller.UserController;
 import com.my.mysql.entity.User;
 import com.my.mysql.mapper.UserMapper;
 import com.my.mysql.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +11,11 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserController userController;
 
     @Override
     public List<User> queryUserList() {
@@ -29,60 +29,45 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String addUser(User user) {
-        try {
-            userMapper.addUser(user);
-            logger.info("新增用户成功，用户ID: {}", user.getId());
-            return "新增成功";
-        } catch (Exception e) {
-            logger.error("新增用户失败，用户信息: {}", user, e);
-            return "新增失败";
-        }
+        userMapper.addUser(user);
+        return "新增成功";
     }
 
     @Override
     public String deleteUserById(int id) {
-        try {
-            userMapper.deleteUserById(id);
-            logger.info("删除用户成功，用户ID: {}", id);
-            return "删除成功";
-        } catch (Exception e) {
-            logger.error("删除用户失败，用户ID: {}", id, e);
-            return "删除失败";
-        }
+        userMapper.deleteUserById(id);
+        return "删除成功";
     }
 
     @Override
     public String updateUser(User user) {
-        if (user == null) {
+        if (user != null) {
+            userMapper.updateUser(user);
+            return "更新成功";
+        } else {
             return "用户信息为空，更新失败";
         }
-        try {
-            userMapper.updateUser(user);
-            logger.info("更新用户信息成功，用户ID: {}", user.getId());
-            return "更新成功";
-        } catch (Exception e) {
-            logger.error("更新用户信息失败，用户信息: {}", user, e);
-            return "更新失败";
-        }
     }
-
-    @Override
-    public User login(String name, String passwd) {
-        return userMapper.login(name, passwd);
-    }
-
-    @Override
-    public String register(User newUser) {
-        if (userMapper.checkUserExists(newUser.getName()) > 0) {
-            return "用户已存在";
-        }
-        try {
-            userMapper.insertUser(newUser);
-            logger.info("用户注册成功，用户ID: {}", newUser.getId());
-            return "注册成功";
-        } catch (Exception e) {
-            logger.error("用户注册失败，用户信息: {}", newUser, e);
-            return "注册失败";
-        }
-    }
+//    @Override
+//    public User login(String name, String passwd) {
+//        // 根据用户名在数据库中查询用户信息
+//        userMapper.login();
+//
+//        if (user != null && user.getPasswd().equals(passwd)) {
+//            return user; // 返回用户信息表示登录成功
+//        } else {
+//            return null; // 返回null表示登录失败
+//        }
+//    }
+//    public String register(User newUser) {
+//        // 检查用户是否已经存在
+//        userMapper.register(newUser);
+//        if (userExists(newUser.getUsername())) {
+//            return "User already exists"; // 返回用户已存在的信息
+//        } else {
+//            // 在这里执行注册逻辑，向数据库中添加新用户
+//            addUser(newUser);
+//            return "Registration successful"; // 返回注册成功信息
+//        }
+//    }
 }
